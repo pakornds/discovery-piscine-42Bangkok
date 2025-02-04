@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calc</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <form id="inp">
+        <div>
+            First Value <input type="text" name="atext">
+        </div>
+        <div>
+            Second Value <input type="text" name="btext">
+        </div>
+        <select name="opchoice">
+            <option value="Plus">+</option>
+            <option value="Minus">-</option>
+            <option value="Multiply">x</option>
+            <option value="Divide">/</option>
+            <option value="Modulo">%</option>
+        </select>
+        <div>
+            <button name="subbtn" type="submit">Calc</button>
+        </div>
+    </form>
+    <script>
+
+
+        const inp = $("#inp")[0]
+        const {
+            elements: {
+                atext,
+                btext,
+                opchoice,
+                subbtn
+            }
+        } = inp
+
+        const validCalc = (a, b) => {
+            if (a < 0 || b < 0)
+                throw 'Error :('
+            else if (isNaN(a) || isNaN(b)) {
+                throw 'Error :('
+            }
+        }
+
+        const validDiv = (b) => {
+            if (b === 0)
+                throw "it's over 9000"
+        }
+
+        const calc = (a, b, op) => {
+            validCalc(a, b)
+            switch (op) {
+                case 'Plus':
+                    return a + b
+                case 'Minus':
+                    return a - b
+                case 'Multiply': 
+                    return a * b
+                case 'Divide':
+                    validDiv(b)
+                    return a / b
+                case 'Modulo':
+                    validDiv(b)
+                    return a % b
+            }
+        }
+
+        const handle = (e) => {
+            e.preventDefault()
+            const a = parseInt(atext.value)
+            const b = parseInt(btext.value)
+            try {
+                const c = calc(a, b, opchoice.value)
+                console.log(c)
+                alert(c)
+            } catch (error) {
+                console.log(error)
+                alert(error)
+            }
+        }
+
+        inp.addEventListener('submit', handle)
+        setInterval(() => {
+            alert("Please, use me...");
+        }, 30000);
+    </script>
+</body>
+
+</html>

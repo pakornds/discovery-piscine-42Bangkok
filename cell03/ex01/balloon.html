@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balloon</title>
+</head>
+
+<body>
+    <style>
+        .circle {
+            height: 200px;
+            width: 200px;
+            background-color: red;
+            border-radius: 50%;
+            display: inline-block;
+        }
+    </style>
+    <div style="text-align:center">
+        <span class="circle" id="Cir" onclick="Plus()" onmouseleave="reduceSize()"></span>
+        <p id="test"></p>
+    </div>
+    <script>
+        varri = 200; //define size
+        brute = ["red", "blue", "green"]; //define color
+        function reduceSize() {
+            //if the size is more than default when you leave circle it will decrease its size by 5
+            //then get id of circle and set its height and width with the current numbers and px
+            if (varri > 200) {
+                varri -= 5;
+                document.getElementById("Cir").style.height = varri + "px";
+                document.getElementById("Cir").style.width = varri + "px";
+                //sizo of index = 3 so using modulo 3 means it can only be 0 1 2
+                document.getElementById("Cir").style.backgroundColor = brute[varri % 3];
+            }
+            //show the current number of size
+            //innerhtml = make text in tag to be like you want
+            document.getElementById("test").innerHTML = varri;
+        }
+
+        function Plus() {
+            if (varri < 420) {
+                varri += 10;
+                document.getElementById("Cir").style.height = varri + "px";
+                document.getElementById("Cir").style.width = varri + "px";
+                document.getElementById("Cir").style.backgroundColor = brute[varri % 3];
+            }
+            else {
+                varri = 200;
+                document.getElementById("Cir").style.height = varri + "px";
+                document.getElementById("Cir").style.width = varri + "px";
+                document.getElementById("Cir").style.backgroundColor = "red";
+            }
+            //innerhtml = make text in tag to be like you want
+            document.getElementById("test").innerHTML = varri;
+        }
+    </script>
+</body>
+
+</html>
